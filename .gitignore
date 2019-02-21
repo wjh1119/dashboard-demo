@@ -1,0 +1,32 @@
+# Windows:
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Python:
+*.py[cod]
+
+
+# My configurations:
+conf.ini
+__pycache__
+*.sqlite
+.ipynb_checkpoints
+*.ipynb
+render.html
+*.png
+msyh.ttf
+*.bat
+*.xlsx
+design
+
+# excel
+*.csv
+*.xlsx
+
+# xmind
+*.xmind 
+
+# vc
+.vs
+.vscode

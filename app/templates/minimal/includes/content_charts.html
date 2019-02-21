@@ -1,0 +1,87 @@
+<!-- row -->
+<div class="row">
+
+
+  <!-- 按传入数据的格式生成图表 -->
+  {% for data in charts%}
+  <!-- col 8 -->
+  <div class="col-lg-12 col-md-12 col-xs-12">
+
+
+
+    <!-- tile -->
+    <section class="tile transparent">
+
+
+
+
+      <!-- tile header -->
+      <div class="tile-header color transparent-black textured rounded-top-corners" id="{{data.id}}">
+        <h1>
+          <strong>{{data.name}}</strong>
+        </h1>
+        <div class="controls">
+          <a href="#" class="refresh">
+            <i class="fa fa-refresh"></i>
+          </a>
+          <a href="#" class="remove">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+      <!-- /tile header -->
+
+      <div class="tile-body color transparent-black rounded-bottom-corners">
+        <div class="row">
+
+          {% for chart in data.charts %}
+
+          <!-- col 6 -->
+          <div class="col-lg-{{chart.width}} offset-lg-{{chart.offset}} col-md-{{chart.width}} offset-md-{{chart.offset}} col-xs-12 offset-xs-0">
+            <section class="tile color transparent-white textured" id="{{chart.id}}">
+              <!-- tile header -->
+              <!-- <div class="tile-header color textured rounded-top-corners" style="background: rgb(0,23,36,0.8)"> -->
+              <!-- <div class="tile-header color textured rounded-top-corners" style="background: rgba(255,255,255,0.5)"> -->
+              <div class="tile-header color transparent-black textured rounded-top-corners">
+                <h1>
+                  <strong> </strong>
+                </h1>
+                <div class="controls">
+                  <a href="#" class="refresh">
+                    <i class="fa fa-refresh"></i>
+                  </a>
+                  <a href="#" class="remove">
+                    <i class="fa fa-times"></i>
+                  </a>
+                </div>
+              </div>
+              <!-- /tile header -->
+              <!-- tile body -->
+              <!-- <div class="tile-body color rounded-bottom-corners" style="background: rgb(0,23,36,1)"> -->
+              <!-- <div class="tile-body color rounded-bottom-corners" style="background: rgba(255,255,255,0.8)"> -->
+              <div class="tile-body color transparent-black rounded-bottom-corners">
+
+                <div render="true">{{chart.content|safe}}</div>
+              </div>
+              <!-- /tile body -->
+            </section>
+
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+
+
+    </section>
+    <!-- /tile -->
+
+
+  </div>
+  <!-- /col 8 -->
+  {% endfor %}
+
+
+
+</div>
+<!-- /row -->

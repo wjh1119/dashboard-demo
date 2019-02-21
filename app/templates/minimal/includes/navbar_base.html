@@ -1,0 +1,56 @@
+<!-- Fixed navbar -->
+<div class="navbar navbar-default navbar-fixed-top navbar-transparent-black mm-fixed-top" role="navigation" id="navbar">
+
+
+
+  <!-- Branding -->
+  <div class="navbar-header col-md-2">
+    <a class="navbar-brand" href="/index">
+      <strong>产品部</strong>报表
+    </a>
+    <div class="sidebar-collapse">
+      <a href="#">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </div>
+  <!-- Branding end -->
+  <div class="copyrights"></div>
+
+
+  <!-- .nav-collapse -->
+  <div class="navbar-collapse">
+
+    <!-- Page refresh -->
+    <ul class="nav navbar-nav refresh">
+      <li class="divided">
+        <a href="#" class="page-refresh">
+          <i class="fa fa-refresh"></i>
+        </a>
+      </li>
+    </ul>
+    <!-- /Page refresh -->
+
+    <!-- Page update time -->
+    <ul class="nav navbar-nav">
+      <li class="divided">
+        <span class="label label-transparent-black" style="position: relative;line-height:45px;">更新时间: {{last_update_time}}</span>
+      </li>
+    </ul>
+    <!-- /Page update time -->
+
+    <ul class="nav navbar-nav navbar-right">
+      {% if current_user.is_authenticated %}
+      <li><a href="{{ url_for('auth.logout') }}">登出</a></li>
+      {% else %}
+      <li><a href="{{ url_for('auth.login') }}"></a></li>
+      {% endif %}
+    </ul>
+
+    {% block sidebar %}{% endblock %}
+
+  </div>
+  <!--/.nav-collapse -->
+
+</div>
+<!-- Fixed navbar end -->

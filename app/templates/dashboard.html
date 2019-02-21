@@ -1,0 +1,1892 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>一点车产品数据展示</title>
+    <meta name="description" content="demo">
+    <meta name="keywords" content="demo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp,no-store" />
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="icon" type="image/png" href="../static/img/logo.png">
+    <link rel="apple-touch-icon-precomposed" href="../static/img/logo.png">
+    <meta name="apple-mobile-web-app-title" content="dashboard" />
+    <link rel="stylesheet" href="../static/css/amazeui.min.css" />
+
+
+    <!-- echarts -->
+    <script src="../static/js/echarts/echarts.min.js"></script>
+    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+
+    <!-- bootstrap -->
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.2.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.2.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/prettify/r224/prettify.css" rel="stylesheet">
+    <link href="../static/css/bootstrap-datetimepicker.css" rel="stylesheet">
+
+    <script src="../static/js/purple-passion.js"></script>
+    <style type="text/css">
+        #nav-switch {
+            position: fixed;
+            right: 20px;
+            bottom: 40px;
+            z-index: 100;
+            height: 41px;
+            line-height: 41px;
+            background: #d0d0d0;
+            text-align: center;
+            width: 130px;
+            cursor: pointer;
+        }
+
+        #nav {
+            position: fixed;
+            right: 20px;
+            bottom: 70px;
+            z-index: 100;
+        }
+
+        #nav li {
+            margin-bottom: 2px;
+            width: 130px;
+            height: 41px;
+            line-height: 41px;
+            list-style: none;
+            text-align: center;
+        }
+
+        #nav a {
+            background: #d0d0d0;
+            color: #333;
+            display: block;
+            text-transform: uppercase;
+            -ms-text-overflow: ellipsis;
+            padding: 0 5px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="am-topbar am-header" id="dashboard-top">
+        <div class="am-topbar-brand">
+            <strong style='font-size: 32px;'>一点车产品数据展示</strong>
+            <!-- <small>报表</small> -->
+            <small class="text-muted">更新于{{last_update_time}}</small>
+        </div>
+
+        <div data-module="topbarcollapse" class="am-collapse am-topbar-collapse">
+            <ul class="am-nav am-nav-pills am-topbar-nav am-topbar-right">
+                <li>
+                    <a data-type="fisrt" href="javascript:void(0);">
+                        <span class="am-icon-asterisk"></span>每日报表</a>
+                </li>
+                <li>
+                    <a data-type="second" href="javascript:void(0);">
+                        <span class="am-icon-history"></span>每月汇总</a>
+                </li>
+                <li>
+                    <a data-type="third" href="javascript:void(0);">
+                        <span class="am-icon-history"></span>每周汇总</a>
+                </li>
+                <!-- <li><a href="javascript:void(0);"><span class="am-icon-angellist"></span>应用性能</a></li> -->
+            </ul>
+        </div>
+    </header>
+
+    <!--导航定位 -->
+    <ul id="nav" style="right:20px">
+        <li>
+            <a href="#dashboard-top">置顶</a>
+        </li>
+        <li class="nav-all nav-main">
+            <a href="#dashboard-loan">放款金额</a>
+        </li>
+        <li class="nav-all nav-main">
+            <a href="#dashboard-apply">申请件数</a>
+        </li>
+        <li class="nav-all nav-main">
+            <a href="#dashboard-review">审批数据</a>
+        </li>
+        <!-- <li class="nav-all nav-main">
+            <a href="#dashboard-loan-average">期均、件均数据</a>
+        </li> -->
+        <li class="nav-all nav-main">
+            <a href="#dashboard-instock">逾期数据</a>
+        </li>
+        <li class="nav-all nav-main">
+            <a href="#dashboard-borrower-cost">借款人成本</a>
+        </li>
+        <li class="nav-all nav-main">
+            <a href="#dashboard-income">收入数据</a>
+        </li>
+        <li class="nav-all nav-main">
+            <a href="#dashboard-period">期限数据</a>
+        </li>
+        <li class="nav-all nav-main">
+            <a href="#dashboard-repayment">还款方式数据</a>
+        </li>
+        <li class="nav-all nav-main">
+            <a href="#dashboard-region">地区数据</a>
+        </li>
+        <li class="nav-all nav-main">
+            <a href="#dashboard-age">各年龄段数据</a>
+        </li>
+        <li class="nav-all nav-month" hidden="true">
+            <a href="#dashboard-month-overall">本月总体数据</a>
+        </li>
+        <li class="nav-all nav-month" hidden="true">
+            <a href="#dashboard-month-per-day">本月每日走势</a>
+        </li>
+        <li class="nav-all nav-month" hidden="true">
+            <a href="#dashboard-month-per-month">每月走势</a>
+        </li>
+        <li class="nav-all nav-month" hidden="true">
+            <a href="#dashboard-month-overdue">最新逾期数据</a>
+        </li>
+        <li class="nav-all nav-week" hidden="true">
+            <a href="#dashboard-week-overall">本周总体数据</a>
+        </li>
+        <li class="nav-all nav-week" hidden="true">
+            <a href="#dashboard-week-per-day">本周每日走势</a>
+        </li>
+        <li class="nav-all nav-week" hidden="true">
+            <a href="#dashboard-week-per-week">每周走势</a>
+        </li>
+        <li class="nav-all nav-week" hidden="true">
+            <a href="#dashboard-week-overdue">最新逾期数据</a>
+        </li>
+        <li>
+            <a href="#dashboard-bottom">置底</a>
+        </li>
+    </ul>
+
+    <div id="nav-switch" onclick="navSwitch()">收起 ></div>
+
+    <!-- <div class="panel panel-default">
+        <a href="#page-stats" class="panel-heading" data-toggle="collapse">Latest Stats</a>
+        <div id="page-stats" class="panel-collapse panel-body collapse in" style="height: auto;">
+
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="knob-container">
+                        <div style="display: inline; width: 200px; height: 200px;">
+                            <canvas width="200" height="200"></canvas>
+                            <input class="knob" data-width="200" data-min="0" data-max="3000" data-displayprevious="true"
+                                value="2500" data-fgcolor="#92A3C2" data-readonly="true;" readonly="readonly" style="width: 104px; height: 66px; position: absolute; vertical-align: middle; margin-top: 66px; margin-left: -152px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 33px; line-height: normal; font-family: Arial; text-align: center; color: rgb(146, 163, 194); padding: 0px; -webkit-appearance: none;">
+                        </div>
+                        <h3 class="text-muted text-center">Accounts</h3>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="knob-container">
+                        <div style="display: inline; width: 200px; height: 200px;">
+                            <canvas width="200" height="200"></canvas>
+                            <input class="knob" data-width="200" data-min="0" data-max="4500" data-displayprevious="true"
+                                value="3299" data-fgcolor="#92A3C2" data-readonly="true;" readonly="readonly" style="width: 104px; height: 66px; position: absolute; vertical-align: middle; margin-top: 66px; margin-left: -152px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 33px; line-height: normal; font-family: Arial; text-align: center; color: rgb(146, 163, 194); padding: 0px; -webkit-appearance: none;">
+                        </div>
+                        <h3 class="text-muted text-center">Subscribers</h3>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="knob-container">
+                        <div style="display: inline; width: 200px; height: 200px;">
+                            <canvas width="200" height="200"></canvas>
+                            <input class="knob" data-width="200" data-min="0" data-max="2700" data-displayprevious="true"
+                                value="1840" data-fgcolor="#92A3C2" data-readonly="true;" readonly="readonly" style="width: 104px; height: 66px; position: absolute; vertical-align: middle; margin-top: 66px; margin-left: -152px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 33px; line-height: normal; font-family: Arial; text-align: center; color: rgb(146, 163, 194); padding: 0px; -webkit-appearance: none;">
+                        </div>
+                        <h3 class="text-muted text-center">Pending</h3>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="knob-container">
+                        <div style="display: inline; width: 200px; height: 200px;">
+                            <canvas width="200" height="200"></canvas>
+                            <input class="knob" data-width="200" data-min="0" data-max="15000" data-displayprevious="true"
+                                value="10067" data-fgcolor="#92A3C2" data-readonly="true;" readonly="readonly" style="width: 104px; height: 66px; position: absolute; vertical-align: middle; margin-top: 66px; margin-left: -152px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 28px; line-height: normal; font-family: Arial; text-align: center; color: rgb(146, 163, 194); padding: 0px; -webkit-appearance: none;">
+                        </div>
+                        <h3 class="text-muted text-center">Completed</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div data-module="firstlevel" class="am-animation-slide-left">
+        <div class="am-cf am-padding" id="dashboard-loan">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">放款金额</strong>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount'}">
+                            <!-- 放款金额（W） -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_amount" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_amount-content" render="true">{{chart.bar_loan_all_amount|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_period_average'}">
+                            <!-- 放款期均 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_period_average" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_period_average-content" render="true">{{chart.bar_loan_all_period_average|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount_average'}">
+                            <!-- 放款件均（W） -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_amount_average" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_amount_average-content" render="true">{{chart.bar_loan_all_amount_average|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount_each_prd'}">
+                            <!-- 各产品放款金额（W） -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_amount_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_amount_each_prd-content" render="true">{{chart.bar_loan_all_amount_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount_each_prd_per'}">
+                            <!-- 各产品放款金额占比（W） -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_amount_each_prd_per" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_amount_each_prd_per-content" render="true">{{chart.bar_loan_all_amount_each_prd_per|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount_dw'}">
+                            <!-- 别等贷各期限对比 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_amount_dw" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_amount_dw-content" render="true">{{chart.bar_loan_all_amount_dw|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount_ge'}">
+                            <!-- 好期贷各期限对比 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_amount_ge" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_amount_ge-content" render="true">{{chart.bar_loan_all_amount_ge|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="am-content">
+        <div data-module="firstlevel" class="am-animation-slide-left">
+            <div class="am-cf am-padding" id="dashboard-apply">
+                <div class="am-fl am-cf">
+                    <strong class="am-text-primary am-text-xxl">申请件数</strong>
+                </div>
+            </div>
+            <!-- <div class="am-container"> -->
+            <div class="am-g">
+                <div class="am-u-md-6">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd">
+                            <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_apply_all_bill'}">
+                                <!-- 申请件数 -->
+                            </h4>
+                        </div>
+                        <div id="bar_apply_all_bill" class="am-panel-collapse am-collapse am-in">
+                            <!-- <div class="am-panel-hd" > -->
+                            <div class="am-panel-hd">
+                                <div id="bar_apply_all_bill-content" render="true">{{chart.bar_apply_all_bill|safe}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-g">
+                <div class="am-u-md-6">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd">
+                            <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_apply_all_bill_each_prd'}">
+                                <!-- 各产品申请件数 -->
+                            </h4>
+                        </div>
+                        <div id="bar_apply_all_bill_each_prd" class="am-panel-collapse am-collapse am-in">
+                            <div class="am-panel-hd">
+                                <div id="bar_apply_all_bill_each_prd-content" render="true">{{chart.bar_apply_all_bill_each_prd|safe}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-md-6">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd">
+                            <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_apply_all_bill_each_prd_per'}">
+                                <!-- 各产品申请件数 -->
+                            </h4>
+                        </div>
+                        <div id="bar_apply_all_bill_each_prd_per" class="am-panel-collapse am-collapse am-in">
+                            <div class="am-panel-hd">
+                                <div id="bar_apply_all_bill_each_prd_per-content" render="true">{{chart.bar_apply_all_bill_each_prd_per|safe}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-g">
+                <div class="am-u-md-6">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd">
+                            <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_apply_all_bill_dw'}">
+                                <!-- 别等贷各期限对比 -->
+                            </h4>
+                        </div>
+                        <div id="bar_apply_all_bill_dw" class="am-panel-collapse am-collapse am-in">
+                            <div class="am-panel-hd">
+                                <div id="bar_apply_all_bill_dw'-content" render="true">{{chart.bar_apply_all_bill_dw|safe}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-md-6">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd">
+                            <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_apply_all_bill_ge'}">
+                                <!-- 好期贷各期限对比 -->
+                            </h4>
+                        </div>
+                        <div id="bar_apply_all_bill_ge" class="am-panel-collapse am-collapse am-in">
+                            <div class="am-panel-hd">
+                                <div id="bar_apply_all_bill_ge-content" render="true">{{chart.bar_apply_all_bill_ge|safe}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div id="winners-widget" class="container">
+            <div class="row">
+                <div class="col col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                    <div class="widget-header">
+                        <h1>申请数据
+                        </h1>
+                    </div>
+                    <div class="widget-body">
+                        <div class="winner-row clearfix">
+                            <h1>申请数据
+                            </h1>
+                        </div>
+
+                        <div class="winner-row clearfix">
+                            <h1>申请数据
+                            </h1>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <!-- 审批数据对比 -->
+    <div data-module="firstlevel" class="am-animation-slide-left">
+        <div class="am-cf am-padding" id="dashboard-review">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">各产品审批数据</strong>
+            </div>
+        </div>
+        <!-- <div class="am-container"> -->
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_review_all_pass_rate'}">
+                            <!-- 审批通过率 -->
+                        </h4>
+                    </div>
+                    <div id="bar_review_all_pass_rate" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_review_all_pass_rate-content" render="true">{{chart.bar_review_all_pass_rate|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_review_pass_rate_each_prd'}">
+                            <!-- 各产品审批通过率对比 -->
+                        </h4>
+                    </div>
+                    <div id="bar_review_pass_rate_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_review_pass_rate_each_prd-content" render="true">{{chart.bar_review_pass_rate_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+    </div>
+
+    <!-- 逾期数据对比 -->
+    <div data-module="firstlevel" class="am-animation-slide-left">
+        <div class="am-cf am-padding" id="dashboard-instock">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">逾期数据</strong>
+            </div>
+        </div>
+        <!-- <div class="am-container"> -->
+
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_instock_all_overdue_rate'}">
+                            <!-- 逾期情况 -->
+                        </h4>
+                    </div>
+                    <div id="bar_instock_all_overdue_rate" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_instock_all_overdue_rate-content" render="true">{{chart.bar_instock_all_overdue_rate|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_instock_all_overdue_amount'}">
+                            <!-- 逾期情况 -->
+                        </h4>
+                    </div>
+                    <div id="bar_instock_all_overdue_amount" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_instock_all_overdue_amount-content" render="true">{{chart.bar_instock_all_overdue_amount|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-12">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_instock_all_overdue_rate_per_prd'}">
+                            <!-- 各产品逾期率 -->
+                        </h4>
+                    </div>
+                    <div id="bar_instock_all_overdue_rate_per_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_instock_all_overdue_rate_per_prd" render="true">{{chart.bar_instock_all_overdue_rate_per_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-12">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_instock_all_overdue_amount_per_prd'}">
+                            <!-- 各产品逾期金额 -->
+                        </h4>
+                    </div>
+                    <div id="bar_instock_all_overdue_amount_per_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_instock_all_overdue_amount_per_prd" render="true">{{chart.bar_instock_all_overdue_amount_per_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+    </div>
+
+    <!-- 借款人成本数据对比 -->
+    <div data-module="firstlevel" class="am-animation-slide-left">
+        <div class="am-cf am-padding" id="dashboard-borrower-cost">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">借款人成本数据</strong>
+            </div>
+        </div>
+        <!-- <div class="am-container"> -->
+
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_borrower_cost_all_average_rate_each_prd'}">
+                            <!-- 各产品借款人成本 -->
+                        </h4>
+                    </div>
+                    <div id="bar_borrower_cost_all_average_rate_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_borrower_cost_all_average_rate_each_prd-content" render="true">{{chart.bar_borrower_cost_all_average_rate_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#scatter_borrower_cost_all_per_prd'}">
+                            <!-- 借款人成本 -->
+                        </h4>
+                    </div>
+                    <div id="scatter_borrower_cost_all_per_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="scatter_borrower_cost_all_per_prd-content" render="true">{{chart.scatter_borrower_cost_all_per_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+    </div>
+
+    <!-- 收入图表 -->
+    <div data-module="firstlevel" class="am-animation-slide-left">
+        <div class="am-cf am-padding" id="dashboard-income">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">收入数据</strong>
+            </div>
+        </div>
+        <!-- <div class="am-container"> -->
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_income_each_prd'}">
+                            <!-- 各产品收入对比 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_income_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_income_each_prd-content" render="true">{{chart.bar_loan_all_income_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_income_dw'}">
+                            <!-- 别等贷各期限对比 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_income_dw" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_income_dw-content" render="true">{{chart.bar_loan_all_income_dw|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_income_ge'}">
+                            <!-- 好期贷各期限对比 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_income_ge" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_income_ge-content" render="true">{{chart.bar_loan_all_income_ge|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+    </div>
+
+
+    <!-- 各期限对比 -->
+    <div data-module="firstlevel" class="am-animation-slide-left">
+        <div class="am-cf am-padding" id="dashboard-period">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">各期限数据</strong>
+            </div>
+        </div>
+        <!-- <div class="am-container"> -->
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_apply_all_bill_each_period'}">
+                            <!-- 各期限申请件数 -->
+                        </h4>
+                    </div>
+                    <div id="bar_apply_all_bill_each_period" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_apply_all_bill_each_period-content" render="true">{{chart.bar_apply_all_bill_each_period|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount_each_period'}">
+                            <!-- 各期限放款金额（W） -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_amount_each_period" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_amount_each_period-content" render="true">{{chart.bar_loan_all_amount_each_period|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_apply_all_bill_each_period_per'}">
+                            <!-- 各期限申请件数 -->
+                        </h4>
+                    </div>
+                    <div id="bar_apply_all_bill_each_period_per" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_apply_all_bill_each_period_per-content" render="true">{{chart.bar_apply_all_bill_each_period_per|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount_each_period_per'}">
+                            <!-- 各期限放款金额（W） -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_amount_each_period_per" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_amount_each_period_per-content" render="true">{{chart.bar_loan_all_amount_each_period_per|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+    </div>
+
+    <!-- 各还款方式对比 -->
+    <div data-module="firstlevel" class="am-animation-slide-left">
+        <div class="am-cf am-padding" id="dashboard-repayment">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">各还款方式数据</strong>
+            </div>
+        </div>
+        <!-- <div class="am-container"> -->
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_apply_all_bill_each_repay'}">
+                            <!-- 各还款方式申请件数 -->
+                        </h4>
+                    </div>
+                    <div id="bar_apply_all_bill_each_repay" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_apply_all_bill_each_repay-content" render="true">{{chart.bar_apply_all_bill_each_repay|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount_each_repay'}">
+                            <!-- 各还款方式放款金额（W） -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_amount_each_repay" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_amount_each_repay-content" render="true">{{chart.bar_loan_all_amount_each_repay|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_apply_all_bill_each_repay_per'}">
+                            <!-- 各还款方式申请件数 -->
+                        </h4>
+                    </div>
+                    <div id="bar_apply_all_bill_each_repay_per" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_apply_all_bill_each_repay_per-content" render="true">{{chart.bar_apply_all_bill_each_repay_per|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount_each_repay_per'}">
+                            <!-- 各还款方式放款金额（W） -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_amount_each_repay_per" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_amount_each_repay_per-content" render="true">{{chart.bar_loan_all_amount_each_repay_per|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+    </div>
+
+    <!-- 各地区对比 -->
+    <div data-module="firstlevel" class="am-animation-slide-left">
+        <div class="am-cf am-padding" id="dashboard-region">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">各地区数据</strong>
+            </div>
+        </div>
+        <!-- <div class="am-container"> -->
+        <!-- <div class="am-g">
+                <div class="am-u-md-12">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd">
+                            <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount_each_province_dw'}">
+                                各地区别等贷放款金额排名
+                            </h4>
+                        </div>
+                        <div id="bar_loan_all_amount_each_province_dw" class="am-panel-collapse am-collapse am-in">
+                            <div class="am-panel-hd">
+                                <div id="bar_loan_all_amount_each_province_dw-content" render="true">{{chart.bar_loan_all_amount_each_province_dw|safe}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-g">
+                <div class="am-u-md-12">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd">
+                            <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount_each_province_ge'}">
+                                各地区好期贷放款金额排名
+                            </h4>
+                        </div>
+                        <div id="bar_loan_all_amount_each_province_ge" class="am-panel-collapse am-collapse am-in">
+                            <div class="am-panel-hd">
+                                <div id="bar_loan_all_amount_each_province_ge-content" render="true">{{chart.bar_loan_all_amount_each_province_ge|safe}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        <div class="am-g">
+            <div class="am-u-md-12">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount_each_province_per'}">
+                            <!-- 各地区各产品放款金额占比对比 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_amount_each_province_per" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_amount_each_province_per-content" render="true">{{chart.bar_loan_all_amount_each_province_per|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="am-g">
+                <div class="am-u-md-12">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd">
+                            <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount_each_province_grid'}">
+                                各地区各产品放款金额数据对比
+                            </h4>
+                        </div>
+                        <div id="bar_loan_all_amount_each_province_grid" class="am-panel-collapse am-collapse am-in">
+                            <div class="am-panel-hd">
+                                <div id="bar_loan_all_amount_each_province_grid-content" render="true">{{chart.bar_loan_all_amount_each_province_grid|safe}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        <hr/>
+    </div>
+
+    <div data-module="firstlevel" class="am-animation-slide-left">
+        <div class="am-cf am-padding" id="dashboard-age">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">各年龄段数据</strong>
+            </div>
+        </div>
+        <!-- <div class="am-container"> -->
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_all_amount_each_age_range'}">
+                            <!-- 各年龄段放款金额占比对比 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_all_amount_each_age_range" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_all_amount_each_age_range-content" render="true">{{chart.bar_loan_all_amount_each_age_range|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+    </div>
+
+
+    <!-- 月度汇总报表 -->
+    <div data-module="secondlevel" class="am-animation-slide-right am-hide">
+
+        <div class="am-g">
+            <!-- <div class="am-u-md-6">
+                            <a class='input-group date' id='datetimepicker1' style="float: left; left: 320px;">
+                                <input type='text' class="form-control" id='nowdate' style="width: 150px; height: 30px;" />
+                                <span class="input-group-addon" style="float: left; width: 50px; height: 30px;">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </a>
+                        </div> -->
+            <div class="am-u-md-6">
+                <div class="input-append date form_datetime" data-date="2012-12">
+                    <input size="16" type="text" value="" style="width: 250px; height: 30px;" readonly>
+                    <span class="add-on" style="width: 30px; height: 30px;">
+                        <i class="icon-remove"></i>
+                    </span>
+                    <span class="add-on" style="width: 30px; height: 30px;">
+                        <i class="icon-th"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="am-cf am-padding" id="dashboard-month-overall">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">本月总体数据</strong>
+                <strong class="am-text-primary am-text-lg">——{{select_month}}</strong>
+            </div>
+        </div>
+
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#pie_apply_month_bill_each_prd'}">
+                            <!-- 申请件数 -->
+                        </h4>
+                    </div>
+                    <div id="pie_apply_month_bill_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="pie_apply_month_bill_each_prd-content" render="true">{{month_chart.pie_apply_month_bill_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#pie_loan_month_amount_each_prd'}">
+                            <!-- 放款金额 -->
+                        </h4>
+                    </div>
+                    <div id="pie_loan_month_amount_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="pie_loan_month_amount_each_prd-content" render="true">{{month_chart.pie_loan_month_amount_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_month_amount_average_each_prd'}">
+                            <!-- 放款件均 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_month_amount_average_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_month_amount_average_each_prd-content" render="true">{{month_chart.bar_loan_month_amount_average_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_month_period_average_each_prd'}">
+                            <!-- 放款期均 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_month_period_average_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_month_period_average_each_prd-content" render="true">{{month_chart.bar_loan_month_period_average_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_review_month_pass_rate_each_prd'}">
+                            <!-- 审批通过率 -->
+                        </h4>
+                    </div>
+                    <div id="bar_review_month_pass_rate_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_review_month_pass_rate_each_prd-content" render="true">{{month_chart.bar_review_month_pass_rate_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_borrower_cost_month_average_rate_each_prd'}">
+                            <!-- 借款人成本 -->
+                        </h4>
+                    </div>
+                    <div id="bar_borrower_cost_month_average_rate_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_borrower_cost_month_average_rate_each_prd-content" render="true">{{month_chart.bar_borrower_cost_month_average_rate_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#pie_loan_month_income_each_prd'}">
+                            <!-- 放款时收入 -->
+                        </h4>
+                    </div>
+                    <div id="pie_loan_month_income_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="pie_loan_month_income_each_prd-content" render="true">{{month_chart.pie_loan_month_income_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#pie_instock_month_income_each_prd'}">
+                            <!-- 存量收入 -->
+                        </h4>
+                    </div>
+                    <div id="pie_instock_month_income_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="pie_instock_month_income_each_prd-content" render="true">{{month_chart.pie_instock_month_income_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#pie_loan_month_amount_distribution'}">
+                            <!-- 放款金额分布 -->
+                        </h4>
+                    </div>
+                    <div id="pie_loan_month_amount_distribution" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="pie_loan_month_amount_distribution-content" render="true">{{month_chart.pie_loan_month_amount_distribution|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="am-cf am-padding" id="dashboard-month-per-day">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">各项指标 - </strong>
+                <strong class="am-text-primary am-text-lg">本月每日走势</strong>
+            </div>
+        </div>
+
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_apply_month_bill'}">
+                            <!-- 申请件数 -->
+                        </h4>
+                    </div>
+                    <div id="bar_apply_month_bill" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_apply_month_bill-content" render="true">{{month_chart.bar_apply_month_bill|safe}}</div>
+                            <div id="bar_apply_month_bill_mom-content" render="true">{{month_chart.bar_apply_month_bill_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_month_amount'}">
+                            <!-- 放款金额 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_month_amount" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_month_amount-content" render="true">{{month_chart.bar_loan_month_amount|safe}}</div>
+                            <div id="bar_loan_month_amount_mom-content" render="true">{{month_chart.bar_loan_month_amount_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_month_amount_average'}">
+                            <!-- 放款件均 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_month_amount_average" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_month_amount_average-content" render="true">{{month_chart.bar_loan_month_amount_average|safe}}</div>
+                            <div id="bar_loan_month_amount_average_mom-content" render="true">{{month_chart.bar_loan_month_amount_average_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_month_period_average'}">
+                            <!-- 放款期均 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_month_period_average" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_month_period_average-content" render="true">{{month_chart.bar_loan_month_period_average|safe}}</div>
+                            <div id="bar_loan_month_period_average_mom-content" render="true">{{month_chart.bar_loan_month_period_average_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_review_month_pass_rate'}">
+                            <!-- 审批通过率 -->
+                        </h4>
+                    </div>
+                    <div id="bar_review_month_pass_rate" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_review_month_pass_rate-content" render="true">{{month_chart.bar_review_month_pass_rate|safe}}</div>
+                            <div id="bar_review_month_pass_rate_mom-content" render="true">{{month_chart.bar_review_month_pass_rate_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_month_income'}">
+                            <!-- 放款时收入 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_month_income" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_month_income-content" render="true">{{month_chart.bar_loan_month_income|safe}}</div>
+                            <div id="bar_loan_month_income_mom-content" render="true">{{month_chart.bar_loan_month_income_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="am-cf am-padding" id="dashboard-month-per-month">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">各项指标 - </strong>
+                <strong class="am-text-primary am-text-lg">每月走势</strong>
+            </div>
+        </div>
+
+        <div class="am-g">
+
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_apply_monthly_bill'}">
+                            <!-- 申请件数 -->
+                        </h4>
+                    </div>
+                    <div id="bar_apply_monthly_bill" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_apply_monthly_bill-content" render="true">{{month_chart.bar_apply_monthly_bill|safe}}</div>
+                            <div id="bar_apply_monthly_bill_mom-content" render="true">{{month_chart.bar_apply_monthly_bill_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_monthly_amount'}">
+                            <!-- 放款金额 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_monthly_amount" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_monthly_amount-content" render="true">{{month_chart.bar_loan_monthly_amount|safe}}</div>
+                            <div id="bar_loan_monthly_amount_mom-content" render="true">{{month_chart.bar_loan_monthly_amount_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_monthly_amount_average'}">
+                            <!-- 放款件均 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_monthly_amount_average" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_monthly_amount_average-content" render="true">{{month_chart.bar_loan_monthly_amount_average|safe}}</div>
+                            <div id="bar_loan_monthly_amount_average_mom-content" render="true">{{month_chart.bar_loan_monthly_amount_average_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_monthly_period_average'}">
+                            <!-- 放款期均 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_monthly_period_average" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_monthly_period_average-content" render="true">{{month_chart.bar_loan_monthly_period_average|safe}}</div>
+                            <div id="bar_loan_monthly_period_average_mom-content" render="true">{{month_chart.bar_loan_monthly_period_average_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_review_monthly_pass_rate'}">
+                            <!-- 审批通过率 -->
+                        </h4>
+                    </div>
+                    <div id="bar_review_monthly_pass_rate" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_review_monthly_pass_rate-content" render="true">{{month_chart.bar_review_monthly_pass_rate|safe}}</div>
+                            <div id="bar_review_monthly_pass_rate_mom-content" render="true">{{month_chart.bar_review_monthly_pass_rate_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_monthly_income'}">
+                            <!-- 放款时收入 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_monthly_income" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_monthly_income-content" render="true">{{month_chart.bar_loan_monthly_income|safe}}</div>
+                            <div id="bar_loan_monthly_income_mom-content" render="true">{{month_chart.bar_loan_monthly_income_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_instock_monthly_income'}">
+                            <!-- 存量收入 -->
+                        </h4>
+                    </div>
+                    <div id="bar_instock_monthly_income" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_instock_monthly_income-content" render="true">{{month_chart.bar_instock_monthly_income|safe}}</div>
+                            <div id="bar_instock_monthly_income_mom-content" render="true">{{month_chart.bar_instock_monthly_income_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="am-cf am-padding" id="dashboard-month-overdue">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">最新逾期数据</strong>
+                <!-- <strong class="am-text-primary am-text-lg"></strong> -->
+            </div>
+        </div>
+
+        <div class="am-g">
+
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_instock_all_overdue_rate2'}">
+                            <!-- 逾期情况 -->
+                        </h4>
+                    </div>
+                    <div id="bar_instock_all_overdue_rate2" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_instock_all_overdue_rate2-content" render="true">{{month_chart.bar_instock_all_overdue_rate2|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-12">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_instock_all_overdue_rate_per_prd2'}">
+                            <!-- 各产品逾期率 -->
+                        </h4>
+                    </div>
+                    <div id="bar_instock_all_overdue_rate_per_prd2" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_instock_all_overdue_rate_per_prd2-content" render="true">{{month_chart.bar_instock_all_overdue_rate_per_prd2|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+    </div>
+
+    <!-- 周汇总报表 -->
+    <div data-module="thirdlevel" class="am-animation-slide-right am-hide">
+
+        <div class="am-cf am-padding" id="dashboard-week-overall">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">本周总体数据</strong>
+                <strong class="am-text-primary am-text-lg">——{{select_week_start}}至{{select_week_end}}</strong>
+            </div>
+        </div>
+
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#pie_apply_week_bill_each_prd'}">
+                            <!-- 申请件数 -->
+                        </h4>
+                    </div>
+                    <div id="pie_apply_week_bill_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="pie_apply_week_bill_each_prd-content" render="true">{{chart.pie_apply_week_bill_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#pie_loan_week_amount_each_prd'}">
+                            <!-- 放款金额 -->
+                        </h4>
+                    </div>
+                    <div id="pie_loan_week_amount_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="pie_loan_week_amount_each_prd-content" render="true">{{chart.pie_loan_week_amount_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_week_amount_average_each_prd'}">
+                            <!-- 放款件均 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_week_amount_average_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_week_amount_average_each_prd-content" render="true">{{chart.bar_loan_week_amount_average_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_week_period_average_each_prd'}">
+                            <!-- 放款期均 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_week_period_average_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_week_period_average_each_prd-content" render="true">{{chart.bar_loan_week_period_average_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_review_week_pass_rate_each_prd'}">
+                            <!-- 审批通过率 -->
+                        </h4>
+                    </div>
+                    <div id="bar_review_week_pass_rate_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_review_week_pass_rate_each_prd-content" render="true">{{chart.bar_review_week_pass_rate_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_borrower_cost_week_average_rate_each_prd'}">
+                            <!-- 借款人成本 -->
+                        </h4>
+                    </div>
+                    <div id="bar_borrower_cost_week_average_rate_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_borrower_cost_week_average_rate_each_prd-content" render="true">{{chart.bar_borrower_cost_week_average_rate_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#pie_loan_week_income_each_prd'}">
+                            <!-- 放款时收入 -->
+                        </h4>
+                    </div>
+                    <div id="pie_loan_week_income_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="pie_loan_week_income_each_prd-content" render="true">{{chart.pie_loan_week_income_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#pie_instock_week_income_each_prd'}">
+                            <!-- 存量收入 -->
+                        </h4>
+                    </div>
+                    <div id="pie_instock_week_income_each_prd" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="pie_instock_week_income_each_prd-content" render="true">{{chart.pie_instock_week_income_each_prd|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#pie_loan_week_amount_distribution'}">
+                            <!-- 放款金额分布 -->
+                        </h4>
+                    </div>
+                    <div id="pie_loan_week_amount_distribution" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="pie_loan_week_amount_distribution-content" render="true">{{chart.pie_loan_week_amount_distribution|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="am-cf am-padding" id="dashboard-week-per-day">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">各项指标 - </strong>
+                <strong class="am-text-primary am-text-lg">本周每日走势</strong>
+            </div>
+        </div>
+
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_apply_week_bill'}">
+                            <!-- 申请件数 -->
+                        </h4>
+                    </div>
+                    <div id="bar_apply_week_bill" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_apply_week_bill-content" render="true">{{chart.bar_apply_week_bill|safe}}</div>
+                            <div id="bar_apply_week_bill_mom-content" render="true">{{chart.bar_apply_week_bill_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_week_amount'}">
+                            <!-- 放款金额 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_week_amount" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_week_amount-content" render="true">{{chart.bar_loan_week_amount|safe}}</div>
+                            <div id="bar_loan_week_amount_mom-content" render="true">{{chart.bar_loan_week_amount_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_week_amount_average'}">
+                            <!-- 放款件均 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_week_amount_average" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_week_amount_average-content" render="true">{{chart.bar_loan_week_amount_average|safe}}</div>
+                            <div id="bar_loan_week_amount_average_mom-content" render="true">{{chart.bar_loan_week_amount_average_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_week_period_average'}">
+                            <!-- 放款期均 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_week_period_average" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_week_period_average-content" render="true">{{chart.bar_loan_week_period_average|safe}}</div>
+                            <div id="bar_loan_week_period_average_mom-content" render="true">{{chart.bar_loan_week_period_average_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_review_week_pass_rate'}">
+                            <!-- 审批通过率 -->
+                        </h4>
+                    </div>
+                    <div id="bar_review_week_pass_rate" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_review_week_pass_rate-content" render="true">{{chart.bar_review_week_pass_rate|safe}}</div>
+                            <div id="bar_review_week_pass_rate_mom-content" render="true">{{chart.bar_review_week_pass_rate_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_week_income'}">
+                            <!-- 放款时收入 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_week_income" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_week_income-content" render="true">{{chart.bar_loan_week_income|safe}}</div>
+                            <div id="bar_loan_week_income_mom-content" render="true">{{chart.bar_loan_week_income_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="am-cf am-padding" id="dashboard-week-per-week">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">各项指标 - </strong>
+                <strong class="am-text-primary am-text-lg">每周走势</strong>
+            </div>
+        </div>
+
+        <div class="am-g">
+
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_apply_weekly_bill'}">
+                            <!-- 申请件数 -->
+                        </h4>
+                    </div>
+                    <div id="bar_apply_weekly_bill" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_apply_weekly_bill-content" render="true">{{chart.bar_apply_weekly_bill|safe}}</div>
+                            <div id="bar_apply_weekly_bill_mom-content" render="true">{{chart.bar_apply_weekly_bill_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_weekly_amount'}">
+                            <!-- 放款金额 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_weekly_amount" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_weekly_amount-content" render="true">{{chart.bar_loan_weekly_amount|safe}}</div>
+                            <div id="bar_loan_weekly_amount_mom-content" render="true">{{chart.bar_loan_weekly_amount_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_weekly_amount_average'}">
+                            <!-- 放款件均 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_weekly_amount_average" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_weekly_amount_average-content" render="true">{{chart.bar_loan_weekly_amount_average|safe}}</div>
+                            <div id="bar_loan_weekly_amount_average_mom-content" render="true">{{chart.bar_loan_weekly_amount_average_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_weekly_period_average'}">
+                            <!-- 放款期均 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_weekly_period_average" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_weekly_period_average-content" render="true">{{chart.bar_loan_weekly_period_average|safe}}</div>
+                            <div id="bar_loan_weekly_period_average_mom-content" render="true">{{chart.bar_loan_weekly_period_average_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_review_weekly_pass_rate'}">
+                            <!-- 审批通过率 -->
+                        </h4>
+                    </div>
+                    <div id="bar_review_weekly_pass_rate" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_review_weekly_pass_rate-content" render="true">{{chart.bar_review_weekly_pass_rate|safe}}</div>
+                            <div id="bar_review_weekly_pass_rate_mom-content" render="true">{{chart.bar_review_weekly_pass_rate_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_loan_weekly_income'}">
+                            <!-- 放款时收入 -->
+                        </h4>
+                    </div>
+                    <div id="bar_loan_weekly_income" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_loan_weekly_income-content" render="true">{{chart.bar_loan_weekly_income|safe}}</div>
+                            <div id="bar_loan_weekly_income_mom-content" render="true">{{chart.bar_loan_weekly_income_mom|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="am-cf am-padding" id="dashboard-week-overdue">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-xxl">最新逾期数据</strong>
+                <!-- <strong class="am-text-primary am-text-lg"></strong> -->
+            </div>
+        </div>
+
+        <div class="am-g">
+
+            <div class="am-u-md-6">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_instock_all_overdue_rate3'}">
+                            <!-- 逾期情况 -->
+                        </h4>
+                    </div>
+                    <div id="bar_instock_all_overdue_rate3" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_instock_all_overdue_rate3-content" render="true">{{chart.bar_instock_all_overdue_rate3|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-u-md-12">
+                <div class="am-panel am-panel-default">
+                    <div class="am-panel-hd">
+                        <h4 class="am-panel-title" data-am-collapse="{ target: '#bar_instock_all_overdue_rate_per_prd3'}">
+                            <!-- 各产品逾期率 -->
+                        </h4>
+                    </div>
+                    <div id="bar_instock_all_overdue_rate_per_prd3" class="am-panel-collapse am-collapse am-in">
+                        <div class="am-panel-hd">
+                            <div id="bar_instock_all_overdue_rate_per_prd3-content" render="true">{{chart.bar_instock_all_overdue_rate_per_prd3|safe}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+    </div>
+
+    <div id="dashboard-bottom"></div>
+    </div>
+
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/amazeui.min.js"></script>
+    <script src="../static/js/t3.min.js"></script>
+    <script src="../static/js/dashboard.min.js"></script>
+
+
+    <!-- bootstrap -->
+    <script src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/2.2.2/bootstrap.min.js"></script>
+    <script src="http://cdn.bootcss.com/prettify/r224/prettify.js"></script>
+    <script src="../static/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="../static/js/bootstrap-datetimepicker.zh-CN.js"></script>
+
+
+    <script type="text/javascript">
+        Box.Application.init();
+    </script>
+    <script>
+        // 这是一段jquery代码 ，需要先加载jquery
+        $(function () {
+            // 页面加载完后300秒刷新当前页面
+            setTimeout(function () {
+                window.location.reload()
+            }, 300000);
+
+            // 悬浮导航
+            var nav_all_list = $('[class^=nav-all]');
+            for (let i = 0; i < nav_all_list.length; i++) {
+                nav_all_list[i].setAttribute("hidden", true);;
+            };
+            var nav_main_list = $('.nav-main');
+            for (let i = 0; i < nav_main_list.length; i++) {
+                nav_main_list[i].removeAttribute("hidden");
+            };
+
+            $(".form_datetime").datetimepicker({
+                format: "yyyy-mm",
+                startDate: "2017-08-01",
+                endDate: "2018-05-01",
+                autoclose: true,
+                todayBtn: true,
+                autoclose: true,
+                startView: 3,
+                minView: 3,
+                language: "zh-CN"
+            });
+        })
+
+
+        function navSwitch() {
+
+            if ($('#nav-switch') != null && $('#nav') != null) {
+                if ($('#nav-switch')[0].innerText === "收起 >") {
+                    $('#nav-switch')[0].innerText = "< 展开";
+                    $('#nav-switch')[0].style.width = "50px";
+                    $('#nav')[0].style.right = "-200px";
+                } else if ($('#nav-switch')[0].innerText === "< 展开") {
+                    $('#nav-switch')[0].innerText = "收起 >";
+                    $('#nav-switch')[0].style.width = "130px";
+                    $('#nav')[0].style.right = "20px";
+                }
+            }
+        }
+
+        // function MouseOver(obj) {
+        //     obj.style.right = "20px";
+        // }
+
+        // function MouseOut(obj) {
+        //     obj.style.right = "-100px";
+        // }
+        // 更改class
+        // $(function () {
+        //     var charts = $('.am-u-md-6')
+        //     for(let i=0;i<charts.length;i++){
+        //         charts[i].setAttribute("class", "am-u-md-6"); 
+        //     }
+        // })
+
+
+        // 自适应网页
+        // $(function () {
+        //     // 各图表的父div
+        //     var chartsContent = $("div[id$='-content'] div")
+        //     for (let i = 0; i < chartsContent.length; i++) {
+        //         // 长度改为100%
+        //         chartsContent[i].style.width = "100%";
+        //         chartsContent[i].style.height = parseFloat(chartsContent[i].offsetWidth) / 2 + "px";
+
+        //         // 图表的div的class居中
+        //         // chartsContent[i].setAttribute("class","am-center");
+        //         // chartsContent[i].style.height = parseFloat(chartsContent[i].offsetWidth) / 2 + "px";
+        //         // chartsContent[i].style.height = parseFloat(chartsContent[i].offsetWidth) / 2 + "px";
+
+        //     }
+        //     var canvasList = $("div[id$='-content'] canvas")
+        //     for (let i = 0; i < canvasList.length; i++) {
+        //         // 长度改为100%
+
+        //         var width = canvasList[i].parentElement.offsetWidth;
+
+        //         canvasList[i].style.width = parseInt(width) + "px";
+        //         canvasList[i].style.height = parseInt(width) / 2 + "px";
+
+        //     }
+        // })
+
+
+        // // 当屏幕尺寸变化
+        // $(window).resize(function() {  
+        //     var width = $(this).width();  
+        //     var height = $(this).height();  
+        //     alert('width'+width+'-height'+height);    
+        // });
+
+
+        // $(function () {
+        //     document.getElementById('bar_apply_all_bill-content').innerHTML = "<b>尚未加载</b>";
+        // })
+
+        // // 异步加载数据
+        // $.get('/111').done(function (data) {
+        //     var chartHTML = document.getElementById('bar_apply_all_bill-content');
+        //     chartHTML.innerHTML = data;
+        //     chartHTML.innerHTML = '<b>加载完毕</b>'
+        //     alert("加载完毕");
+        //     // document.getElementById('bar_apply_all_bill-content').innerHTML = data;
+        //     // document.getElementById('bar_apply_all_bill-content').innerHTML = "data";
+        // });
+
+        // 异步加载数据
+        // $.get('/111').done(function (data) {
+        //     var chartHTML = document.getElementById('bar_apply_all_bill-content');
+        //     chartHTML.innerHTML = data;
+        //     chartHTML.innerHTML = '<b>加载完毕</b>'
+        //     alert("加载完毕");
+        //     // document.getElementById('bar_apply_all_bill-content').innerHTML = data;
+        //     // document.getElementById('bar_apply_all_bill-content').innerHTML = "data";
+        // });
+
+
+    </script>
+</body>
+
+</html>

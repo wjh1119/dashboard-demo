@@ -1,0 +1,43 @@
+{% extends "/minimal/base.html" %} {% block title %}产品部——仪表盘{% endblock %}
+
+<!-- 导航 -->
+{% block navbar %} {% include '/minimal/includes/navbar_fixed.html' %} {% endblock %} {% block page_content %}
+<!-- Page content -->
+<div id="content" class="col-md-12">
+
+    <!-- page header -->
+    <div class="pageheader">
+
+
+        <h2>
+            <i class="fa fa-tachometer"></i> 仪表盘
+            <span>重要指标</span>
+        </h2>
+
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li>你的位置</li>
+                <li>
+                    <a href="/">产品部</a>
+                </li>
+                <li class="active">仪表盘</li>
+            </ol>
+        </div>
+
+
+    </div>
+    <!-- /page header -->
+
+    <!-- content main container -->
+    <div class="main">
+    
+        <!-- 页面内容的图表 -->
+        {% include '/minimal/includes/content_collection_template.html' %}
+        {% include '/minimal/includes/content_charts.html' %}
+
+    </div>
+    <!-- /content container -->
+
+</div>
+<!-- Page content end -->
+{% endblock %}

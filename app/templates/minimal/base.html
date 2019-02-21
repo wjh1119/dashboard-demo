@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        {% block title %} 产品部 {% endblock %}
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+
+    <link rel="icon" type="image/png" href="../static/img/logo.png">
+    <!-- Bootstrap -->
+    <link href="../static/css/vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/vendor/animate/animate.min.css">
+    <link type="text/css" rel="stylesheet" media="all" href="../static/js/vendor/mmenu/css/jquery.mmenu.all.css" />
+    <link rel="stylesheet" href="../static/js/vendor/videobackground/css/jquery.videobackground.css">
+    <link rel="stylesheet" href="../static/css/vendor/bootstrap-checkbox.css">
+
+    <link rel="stylesheet" href="../static/js/vendor/rickshaw/css/rickshaw.min.css">
+    <link rel="stylesheet" href="../static/js/vendor/morris/css/morris.css">
+    <link rel="stylesheet" href="../static/js/vendor/tabdrop/css/tabdrop.css">
+    <link rel="stylesheet" href="../static/js/vendor/summernote/css/summernote.css">
+    <link rel="stylesheet" href="../static/js/vendor/summernote/css/summernote-bs3.css">
+    <link rel="stylesheet" href="../static/js/vendor/chosen/css/chosen.min.css">
+    <link rel="stylesheet" href="../static/js/vendor/chosen/css/chosen-bootstrap.css">
+
+    <!-- echarts -->
+    <script src="../static/js/echarts/echarts.min.js"></script>
+    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+
+    <link href="../static/css/minimal.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="bg-6">
+
+    <!-- Preloader -->
+    <div class="mask">
+        <div id="loader"></div>
+    </div>
+    <!--/Preloader -->
+
+    <!-- Wrap all page content here -->
+    <div id="wrap">
+
+        <!-- Make page fluid -->
+        <div class="row">
+
+            <!-- 导航 -->
+            {% block navbar %} {% include 'minimal/includes/navbar_fixed.html' %} {% endblock %}
+
+            <!-- 页面内容 -->
+            {% block page_content %} {% endblock %}
+
+        </div>
+        <!-- Make page fluid-->
+
+    </div>
+    <!-- Wrap all page content end -->
+
+    <section class="videocontent" id="video"></section>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../static/js/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../static/js/vendor/bootstrap/bootstrap.min.js"></script>
+    <script src="../static/js/bootstrap-hover-dropdown.js"></script>
+
+    <script type="text/javascript" src="../static/js/vendor/mmenu/js/jquery.mmenu.min.js"></script>
+    <script type="text/javascript" src="../static/js/vendor/sparkline/jquery.sparkline.min.js"></script>
+    <script type="text/javascript" src="../static/js/vendor/nicescroll/jquery.nicescroll.min.js"></script>
+    <script type="text/javascript" src="../static/js/vendor/animate-numbers/jquery.animateNumbers.js"></script>
+    <script type="text/javascript" src="../static/js/vendor/videobackground/jquery.videobackground.js"></script>
+    <script type="text/javascript" src="../static/js/vendor/blockui/jquery.blockUI.js"></script>
+
+    <script src="../static/js/vendor/flot/jquery.flot.min.js"></script>
+    <script src="../static/js/vendor/flot/jquery.flot.time.min.js"></script>
+    <script src="../static/js/vendor/flot/jquery.flot.selection.min.js"></script>
+    <script src="../static/js/vendor/flot/jquery.flot.animator.min.js"></script>
+    <script src="../static/js/vendor/flot/jquery.flot.orderBars.js"></script>
+    <script src="../static/js/vendor/easypiechart/jquery.easypiechart.min.js"></script>
+
+    <script src="../static/js/vendor/rickshaw/raphael-min.js"></script>
+    <script src="../static/js/vendor/rickshaw/d3.v2.js"></script>
+    <script src="../static/js/vendor/rickshaw/rickshaw.min.js"></script>
+
+    <script src="../static/js/vendor/morris/morris.min.js"></script>
+
+    <script src="../static/js/vendor/tabdrop/bootstrap-tabdrop.min.js"></script>
+
+    <script src="../static/js/vendor/summernote/summernote.min.js"></script>
+
+    <script src="../static/js/vendor/chosen/chosen.jquery.min.js"></script>
+
+    <script src="../static/js/minimal.min.js"></script>
+
+    <!-- 下载文件 -->
+    <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+    <script type="text/javascript" src="../static/js/print/jsPdf.debug.js"></script>
+    <script type="text/javascript">
+        $(function(){
+      
+          // Initialize card flip
+          $('.card.hover').hover(function(){
+            $(this).addClass('flip');
+          },function(){
+            $(this).removeClass('flip');
+          });
+        })
+    </script>
+    <script type="text/javascript">
+
+        var downPdf = document.getElementById("renderPdf");
+
+        downPdf.onclick = function () {
+            html2canvas(document.body, {
+                onrendered: function (canvas) {
+
+                    var contentWidth = canvas.width;
+                    var contentHeight = canvas.height;
+
+                    //一页pdf显示html页面生成的canvas高度;
+                    var pageHeight = contentWidth / 592.28 * 841.89;
+                    //未生成pdf的html页面高度
+                    var leftHeight = contentHeight;
+                    //pdf页面偏移
+                    var position = 0;
+                    //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+                    var imgWidth = 595.28;
+                    var imgHeight = 592.28 / contentWidth * contentHeight;
+
+                    var pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+                    var pdf = new jsPDF('', 'pt', 'a4');
+
+                    //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+                    //当内容未超过pdf一页显示的范围，无需分页
+                    if (leftHeight < pageHeight) {
+                        pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+                    } else {
+                        while (leftHeight > 0) {
+                            pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+                            leftHeight -= pageHeight;
+                            position -= 841.89;
+                            //避免添加空白页
+                            if (leftHeight > 0) {
+                                pdf.addPage();
+                            }
+                        }
+                    }
+
+                    pdf.save('content.pdf');
+                }
+            })
+        }
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $(".saveImage").on('click', function (event) {
+                var img = {}
+                event.preventDefault();
+                html2canvas($("#wrap"), {
+                    allowTaint: true,
+                    taintTest: false,
+                    onrendered: function (canvas) {
+                  
+                        var contentWidth = canvas.width;
+                        var contentHeight = canvas.height;
+
+                        //一页pdf显示html页面生成的canvas高度;
+                        var pageHeight = contentWidth / 592.28 * 841.89;
+                        //未生成pdf的html页面高度
+                        var leftHeight = contentHeight;
+                        //pdf页面偏移
+                        var position = 0;
+                        //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+                        var imgWidth = 595.28;
+                        var imgHeight = 592.28 / contentWidth * contentHeight;
+
+                        var pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+                        var pdf = new jsPDF('', 'pt', 'a4');
+
+                        //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+                        //当内容未超过pdf一页显示的范围，无需分页
+                        if (leftHeight < pageHeight) {
+                            pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+                        } else {
+                            while (leftHeight > 0) {
+                                pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+                                leftHeight -= pageHeight;
+                                position -= 841.89;
+                                //避免添加空白页
+                                if (leftHeight > 0) {
+                                    pdf.addPage();
+                                }
+                            }
+                        }
+
+                        pdf.save('content.pdf');
+                    }
+                });
+            });
+        });
+
+        // 保存图片
+        function saveimg(img) {
+            $.ajax({
+                url: "{:U('Index/saveImg')}",
+                type: 'post',
+                data: img,
+                success: function (data) {
+                    if (data.status) {
+                        //toast.success(data.info,'温馨提示');
+                        setTimeout(function () {
+                            window.location.href = "../Uploads/Screen/" + data.url + ".png";
+                        }, 1000)
+
+                    } else {
+                        //toast.error(data.info,'温馨提示');
+                        setTimeout(function () {
+                            window.location.reload(true);
+                        }, 1200)
+                    };
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

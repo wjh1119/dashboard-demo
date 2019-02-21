@@ -1,0 +1,14 @@
+{% extends "minimal/base.html" %}
+
+{% block title %}产品部 - 首页{% endblock %}
+
+{% block navbar %} {% include '/minimal/includes/navbar_simple.html' %} {% endblock %}
+{% block page_content %}
+<!-- Page content -->
+<div id="content" class="col-md-12">
+    <div class="page-header">
+        <h1>产品部系统</h1>
+    </div>
+    <p><a href="{{ url_for('auth.login') }}">点击这里登录系统</a>.</p>
+</div>
+{% endblock %}

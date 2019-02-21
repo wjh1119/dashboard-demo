@@ -1,0 +1,872 @@
+{% if collection %}
+ {% if collection.show_all %}
+<!-- 累计数据 -->
+<section class="tile transparent">
+  <!-- tile header -->
+  <div class="tile-header transparent">
+    <h1>
+      <strong class="text-muted" style="font-size:36px">累计数据</strong>
+    </h1>
+    <div class="controls">
+      <a href="#" class="refresh">
+        <i class="fa fa-refresh"></i>
+      </a>
+      <a href="#" class="remove">
+        <i class="fa fa-times"></i>
+      </a>
+    </div>
+  </div>
+  <!-- /tile header -->
+  <!-- tile body -->
+  <div class="tile-body color transparent-black rounded-corners">
+    <!-- cards -->
+    <div class="row cards">
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-redbrown hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-users media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">累计申请件数</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.all.apply_bill}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡片背面 -->
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-blue hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">累计放款金额（万）</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.all.loan_amount}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+          </div>
+
+          <!-- 卡片背面 -->
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-greensea hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">在库金额（亿）</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.all.instock_amount}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+          </div>
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card-container col-lg-2 col-sm-4 col-xs-12">
+        <div class="card card-slategray hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">累计放款时收入（万）</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.all.loan_income}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+          </div>
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /cards -->
+
+  </div>
+  <!-- /tile body -->
+</section>
+ {% endif %}
+
+ {% if collection.show_current %}
+
+<!-- 实时数据 -->
+<section class="tile transparent">
+
+
+
+  <!-- tile header -->
+  <div class="tile-header transparent">
+    <h1>
+      <strong class="text-muted" style="font-size:36px">实时数据</strong>
+    </h1>
+    <div class="controls">
+      <a href="#" class="refresh">
+        <i class="fa fa-refresh"></i>
+      </a>
+      <a href="#" class="remove">
+        <i class="fa fa-times"></i>
+      </a>
+    </div>
+  </div>
+  <!-- /tile header -->
+
+  {% if "day" in collection %}
+  <!-- 今日重要指标 -->
+  <div class="tile-body color transparent-black rounded-corners">
+    <!-- cards -->
+    <div class="row cards">
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-redbrown hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-users media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">今日申请件数</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.day.apply_bill}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+                      <div class="details">
+                          <div class="title">今日计划完成度 %</div>
+                      </div>
+                      <div class="status pull-right bg-transparent-black-1">
+                          <span class="animate-number" data-value="100" data-animation-duration="1500">0</span>%
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="progress progress-little progress-transparent-black">
+                          <div class="progress-bar animate-progress-bar" data-percentage="83%"></div>
+                      </div>
+                  </div> -->
+
+          </div>
+
+          <!-- 卡片背面 -->
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-blue hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">今日放款金额（万）</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.day.loan_amount}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+                      <div class="details">
+                          <div class="title">今日计划完成度 %</div>
+                      </div>
+                      <div class="status pull-right bg-transparent-black-1">
+                          <span class="animate-number" data-value="100" data-animation-duration="1500">0</span>%
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="progress progress-little progress-transparent-black">
+                          <div class="progress-bar animate-progress-bar" data-percentage="100%"></div>
+                      </div>
+                  </div> -->
+
+          </div>
+
+          <!-- 卡片背面 -->
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-greensea hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">今日放款件均(万)</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.day.loan_amount_average}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+              <div class="details">
+                <div class="title">This month plan %</div>
+              </div>
+              <div class="status pull-right bg-transparent-black-1">
+                <span class="animate-number" data-value="42" data-animation-duration="1500">0</span>%
+              </div>
+              <div class="clearfix"></div>
+              <div class="progress progress-little progress-transparent-black">
+                <div class="progress-bar animate-progress-bar" data-percentage="42%"></div>
+              </div>
+            </div> -->
+
+          </div>
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card-container col-lg-3 col-sm-6 col-xs-12">
+        <div class="card card-slategray hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">今日放款时收入（万）</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.day.loan_income}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+                      <div class="details">
+                          <div class="title">今日计划完成度 %</div>
+                      </div>
+                      <div class="status pull-right bg-transparent-black-1">
+                          <span class="animate-number" data-value="80" data-animation-duration="1500">0</span>%
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="progress progress-little progress-transparent-black">
+                          <div class="progress-bar animate-progress-bar" data-percentage="25%"></div>
+                      </div>
+                  </div> -->
+
+          </div>
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+    <!-- /cards -->
+  </div>
+  {% endif %}
+
+  {% if "week" in collection %}
+  <!-- 本周重要指标 -->
+  <div class="tile-body color transparent-black rounded-corners">
+    <!-- cards -->
+    <div class="row cards">
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-redbrown hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-users media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">本周申请件数</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.week.apply_bill}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+                      <div class="details">
+                          <div class="title">今日计划完成度 %</div>
+                      </div>
+                      <div class="status pull-right bg-transparent-black-1">
+                          <span class="animate-number" data-value="100" data-animation-duration="1500">0</span>%
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="progress progress-little progress-transparent-black">
+                          <div class="progress-bar animate-progress-bar" data-percentage="83%"></div>
+                      </div>
+                  </div> -->
+
+          </div>
+
+          <!-- 卡片背面 -->
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-blue hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">本周放款金额（万）</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.week.loan_amount}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+                      <div class="details">
+                          <div class="title">今日计划完成度 %</div>
+                      </div>
+                      <div class="status pull-right bg-transparent-black-1">
+                          <span class="animate-number" data-value="100" data-animation-duration="1500">0</span>%
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="progress progress-little progress-transparent-black">
+                          <div class="progress-bar animate-progress-bar" data-percentage="100%"></div>
+                      </div>
+                  </div> -->
+
+          </div>
+
+          <!-- 卡片背面 -->
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-greensea hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">本周放款件均(万)</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.week.loan_amount_average}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+              <div class="details">
+                <div class="title">This month plan %</div>
+              </div>
+              <div class="status pull-right bg-transparent-black-1">
+                <span class="animate-number" data-value="42" data-animation-duration="1500">0</span>%
+              </div>
+              <div class="clearfix"></div>
+              <div class="progress progress-little progress-transparent-black">
+                <div class="progress-bar animate-progress-bar" data-percentage="42%"></div>
+              </div>
+            </div> -->
+
+          </div>
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card-container col-lg-3 col-sm-6 col-xs-12">
+        <div class="card card-slategray hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">本周放款时收入（万）</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.week.loan_income}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+                      <div class="details">
+                          <div class="title">今日计划完成度 %</div>
+                      </div>
+                      <div class="status pull-right bg-transparent-black-1">
+                          <span class="animate-number" data-value="80" data-animation-duration="1500">0</span>%
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="progress progress-little progress-transparent-black">
+                          <div class="progress-bar animate-progress-bar" data-percentage="25%"></div>
+                      </div>
+                  </div> -->
+
+          </div>
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /cards -->
+  </div>
+  {% endif %}
+
+  {% if "month" in collection %}
+  <!-- 本月重要指标 -->
+  <div class="tile-body color transparent-black rounded-corners">
+    <!-- cards -->
+    <div class="row cards">
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-redbrown hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-users media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">本月申请件数</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.month.apply_bill}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+                              <div class="details">
+                                  <div class="title">今日计划完成度 %</div>
+                              </div>
+                              <div class="status pull-right bg-transparent-black-1">
+                                  <span class="animate-number" data-value="100" data-animation-duration="1500">0</span>%
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="progress progress-little progress-transparent-black">
+                                  <div class="progress-bar animate-progress-bar" data-percentage="83%"></div>
+                              </div>
+                          </div> -->
+
+          </div>
+
+          <!-- 卡片背面 -->
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-blue hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">本月放款金额（万）</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.month.loan_amount}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+                              <div class="details">
+                                  <div class="title">今日计划完成度 %</div>
+                              </div>
+                              <div class="status pull-right bg-transparent-black-1">
+                                  <span class="animate-number" data-value="100" data-animation-duration="1500">0</span>%
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="progress progress-little progress-transparent-black">
+                                  <div class="progress-bar animate-progress-bar" data-percentage="100%"></div>
+                              </div>
+                          </div> -->
+
+          </div>
+
+          <!-- 卡片背面 -->
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-greensea hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">本月放款件均(万)</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.month.loan_amount_average}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+                      <div class="details">
+                      <div class="title">This month plan %</div>
+                      </div>
+                      <div class="status pull-right bg-transparent-black-1">
+                      <span class="animate-number" data-value="42" data-animation-duration="1500">0</span>%
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="progress progress-little progress-transparent-black">
+                      <div class="progress-bar animate-progress-bar" data-percentage="42%"></div>
+                      </div>
+                  </div> -->
+
+          </div>
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card-container col-lg-3 col-sm-6 col-xs-12">
+        <div class="card card-slategray hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">本月放款时收入（万）</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.month.loan_income}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+                              <div class="details">
+                                  <div class="title">今日计划完成度 %</div>
+                              </div>
+                              <div class="status pull-right bg-transparent-black-1">
+                                  <span class="animate-number" data-value="80" data-animation-duration="1500">0</span>%
+                              </div>
+                              <div class="clearfix"></div>
+                              <div class="progress progress-little progress-transparent-black">
+                                  <div class="progress-bar animate-progress-bar" data-percentage="25%"></div>
+                              </div>
+                          </div> -->
+
+          </div>
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /cards -->
+  </div>
+  {% endif %}
+
+</section>
+ {% endif %}
+
+ {% if collection.show_instock %}
+
+<!-- 在库数据报表 -->
+<section class="tile transparent">
+
+
+
+  <!-- tile header -->
+  <div class="tile-header transparent">
+    <h1>
+      <strong class="text-muted" style="font-size:36px">在库数据</strong>
+    </h1>
+    <div class="controls">
+      <a href="#" class="refresh">
+        <i class="fa fa-refresh"></i>
+      </a>
+      <a href="#" class="remove">
+        <i class="fa fa-times"></i>
+      </a>
+    </div>
+  </div>
+  <!-- /tile header -->
+
+  <!-- 今日重要指标 -->
+  <div class="tile-body color transparent-black rounded-corners">
+    <!-- cards -->
+    <div class="row cards">
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-redbrown hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-users media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">总在库金额</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.instock.all}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+                      <div class="details">
+                          <div class="title">今日计划完成度 %</div>
+                      </div>
+                      <div class="status pull-right bg-transparent-black-1">
+                          <span class="animate-number" data-value="100" data-animation-duration="1500">0</span>%
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="progress progress-little progress-transparent-black">
+                          <div class="progress-bar animate-progress-bar" data-percentage="83%"></div>
+                      </div>
+                  </div> -->
+
+          </div>
+
+          <!-- 卡片背面 -->
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-blue hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">正常还款金额</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.instock.normal}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+                      <div class="details">
+                          <div class="title">今日计划完成度 %</div>
+                      </div>
+                      <div class="status pull-right bg-transparent-black-1">
+                          <span class="animate-number" data-value="100" data-animation-duration="1500">0</span>%
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="progress progress-little progress-transparent-black">
+                          <div class="progress-bar animate-progress-bar" data-percentage="100%"></div>
+                      </div>
+                  </div> -->
+
+          </div>
+
+          <!-- 卡片背面 -->
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+        <div class="card card-greensea hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">逾期金额</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.instock.overdue}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+              <div class="details">
+                <div class="title">This month plan %</div>
+              </div>
+              <div class="status pull-right bg-transparent-black-1">
+                <span class="animate-number" data-value="42" data-animation-duration="1500">0</span>%
+              </div>
+              <div class="clearfix"></div>
+              <div class="progress progress-little progress-transparent-black">
+                <div class="progress-bar animate-progress-bar" data-percentage="42%"></div>
+              </div>
+            </div> -->
+
+          </div>
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card-container col-lg-3 col-sm-6 col-xs-12">
+        <div class="card card-slategray hover">
+          <div class="front">
+
+            <div class="media">
+              <span class="pull-left">
+                <i class="fa fa-usd media-object"></i>
+              </span>
+
+              <div class="media-body">
+                <small style="font-size:18px">坏账金额</small>
+                <h2 class="media-heading animate-number" data-value="{{collection.instock.bad_debt}}" data-animation-duration="1500">0</h2>
+              </div>
+            </div>
+
+            <!-- <div class="progress-list">
+                      <div class="details">
+                          <div class="title">今日计划完成度 %</div>
+                      </div>
+                      <div class="status pull-right bg-transparent-black-1">
+                          <span class="animate-number" data-value="80" data-animation-duration="1500">0</span>%
+                      </div>
+                      <div class="clearfix"></div>
+                      <div class="progress progress-little progress-transparent-black">
+                          <div class="progress-bar animate-progress-bar" data-percentage="25%"></div>
+                      </div>
+                  </div> -->
+
+          </div>
+          <div class="back">
+            <a href="#">
+              <i class="fa fa-bar-chart-o fa-4x"></i>
+              <span>查看详情</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+    <!-- /cards -->
+  </div>
+</section>
+ {% endif %}
+{% endif %}

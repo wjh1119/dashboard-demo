@@ -1,0 +1,57 @@
+{% for section in collection.sections%}
+<!-- 在库数据报表 -->
+<section class="tile transparent">
+  {% if "section_name" in section%}
+    <!-- tile header -->
+    <div class="tile-header transparent">
+      <h1>
+        <strong class="text-muted" style="font-size:36px">{{section.section_name}}</strong>
+      </h1>
+      <div class="controls">
+        <a href="#" class="refresh">
+          <i class="fa fa-refresh"></i>
+        </a>
+        <a href="#" class="remove">
+          <i class="fa fa-times"></i>
+        </a>
+      </div>
+    </div>
+    <!-- /tile header -->
+    <div class="tile-body color transparent-black rounded-corners">
+    {% if 'rows' in section%}
+      <!-- cards -->
+      {% for row in section.rows %}
+        <div class="row cards">
+        {% for sub_collection_data in row %}
+        <div class="card-container col-lg-2 col-sm-4 col-sm-12">
+          <div class="card card-{{sub_collection_data.color}} hover">
+            <div class="front">
+
+              <div class="media">
+                <span class="pull-left">
+                  <i class="fa fa-usd media-object"></i>
+                </span>
+
+                <div class="media-body">
+                  <small style="font-size:18px">{{sub_collection_data.data_name}}</small>
+                  <h2 class="media-heading animate-number" data-value="{{sub_collection_data.data_value}}"
+                    data-animation-duration="1500">0</h2>
+                </div>
+              </div>
+            </div>
+            <div class="back">
+              <a href="{{sub_collection_data.href}}">
+                <i class="fa fa-bar-chart-o fa-4x"></i>
+                <span>查看详情</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        </div>
+      {% endfor %}
+    {% endif %}
+    </div>
+  {% endif %}
+</section>
+{% endfor %}
