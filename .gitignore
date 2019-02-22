@@ -10,15 +10,14 @@ Desktop.ini
 # My configurations:
 conf.ini
 __pycache__
-*.sqlite
 .ipynb_checkpoints
 *.ipynb
 render.html
-*.png
 msyh.ttf
 *.bat
 *.xlsx
 design
+.env
 
 # excel
 *.csv
