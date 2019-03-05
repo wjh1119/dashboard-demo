@@ -13,6 +13,7 @@
     <div class="col-md-4">
         {{ wtf.quick_form(form) }}
         <br>
+        <p> 新客户? <a href="{{ url_for('auth.register') }}"> 注册 </a>.</p>
     </div>
 </div>
 {% endblock %}
