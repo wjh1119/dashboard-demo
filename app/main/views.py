@@ -10,6 +10,7 @@ from . import main
 from .. import db
 
 from .forms import NameForm
+from .charts import *
 
 PROJECT_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -60,15 +61,15 @@ def minimal_dashboard():
             "data_name": "当日放款金额(万)",
             "data_value": 3000,
             'color': 'blue',
-            "href": '/day_report#day_loan'
+            "href": '/day_report#day_loan_amount'
         }, {
             "data_name": "当日放款件均(万)",
-            "data_value": 15.2,
+            "data_value": 15,
             'color': 'greensea',
-            "href": '/day_report#bar_loan_all_amount_average'
+            "href": '/day_report#day_loan_average'
         }, {
             "data_name": "当日放款时收入(万)",
-            "data_value": 200,
+            "data_value": 100,
             'color': 'slategray',
             "href": '/day_report#day_income'
         }, {
@@ -78,7 +79,7 @@ def minimal_dashboard():
             "href": '/day_report#day_review'
         }, {
             "data_name": "当日签约率",
-            "data_value": "75%",
+            "data_value": "74%",
             'color': 'orange',
             "href": '/day_report#day_sign'
         }], [{
@@ -114,20 +115,6 @@ def minimal_dashboard():
         }]]
     }]
 
-    # dashboard_charts = [{
-    #     "name":
-    #     "放款数据",
-    #     "charts": [{
-    #         "width":
-    #         12,
-    #         "offset":
-    #         0,
-    #         "content":
-    #         chart[charts.get_select_month()]['bar_loan_month_amount'],
-    #         "id":
-    #         'bar_loan_month_amount'
-    #     }]
-    # }]
     dashboard_charts = []
 
     return render_template(
@@ -166,12 +153,12 @@ def minimal_day_report():
             "data_name": "当日放款金额(万)",
             "data_value": 3000,
             'color': 'blue',
-            "href": '#day_loan'
+            "href": '#day_loan_amount'
         }, {
             "data_name": "当日放款件均(万)",
             "data_value": 15,
             'color': 'greensea',
-            "href": '#bar_loan_all_amount_average'
+            "href": '#day_loan_average'
         }, {
             "data_name": "当日放款时收入(万)",
             "data_value": 100,
@@ -190,7 +177,67 @@ def minimal_day_report():
         }]]
     }]
 
-    day_charts = []
+    day_charts = [{
+        "name":
+        "申请数据",
+        "id":
+        'day_apply',
+        "charts": [{
+            "width": 12,
+            "offset": 0,
+            "content": day_apply_bill().render_embed(),
+            "id": 'day_apply_bill'
+        }]
+    }, {
+        "name":
+        "放款数据",
+        "id":
+        'day_loan',
+        "charts": [{
+            "width": 6,
+            "offset": 0,
+            "content": day_loan_amount().render_embed(),
+            "id": 'day_loan_amount'
+        }, {
+            "width": 6,
+            "offset": 0,
+            "content": day_loan_average().render_embed(),
+            "id": 'day_loan_average'
+        }]
+    }, {
+        "name":
+        "收入数据",
+        "id":
+        'day_income',
+        "charts": [{
+            "width": 6,
+            "offset": 0,
+            "content": day_loan_income().render_embed(),
+            "id": 'day_loan_income'
+        }]
+    }, {
+        "name":
+        "审批数据",
+        "id":
+        'day_review',
+        "charts": [{
+            "width": 6,
+            "offset": 0,
+            "content": day_review().render_embed(),
+            "id": 'day_loan_income'
+        }]
+    }, {
+        "name":
+        "签约数据",
+        "id":
+        'day_sign',
+        "charts": [{
+            "width": 6,
+            "offset": 0,
+            "content": day_sign().render_embed(),
+            "id": 'day_loan_income'
+        }]
+    }]
 
     return render_template(
         '/minimal/report/day_report.html',
