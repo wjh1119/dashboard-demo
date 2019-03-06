@@ -26,20 +26,14 @@
       <li class="divided">
         <a href="#" class="page-refresh">
           <i class="fa fa-refresh"></i>
+          <span class="label label-transparent-black" style="position: relative;line-height:45px;">更新时间:
+              {{last_update_time}}</span>
         </a>
       </li>
     </ul>
     <!-- /Page refresh -->
 
-    <!-- Page update time -->
-    <ul class="nav navbar-nav">
-      <li class="divided">
-        <span class="label label-transparent-black" style="position: relative;line-height:45px;">更新时间: {{last_update_time}}</span>
-      </li>
-    </ul>
-    <!-- /Page update time -->
-
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav quick-actions">
       {% if current_user.is_authenticated %}
       <li><a href="{{ url_for('auth.logout') }}">登出</a></li>
       {% else %}
