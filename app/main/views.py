@@ -16,10 +16,17 @@ PROJECT_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
-@main.route('/index')
-def minimal_index():
+@main.route('/home')
+def minimal_home():
 
     return render_template('/minimal/index.html')
+
+@main.route('/')
+@login_required
+def minimal_root():
+
+    return redirect(
+        url_for('main.minimal_home'))
 
 
 @main.route('/dashboard')
