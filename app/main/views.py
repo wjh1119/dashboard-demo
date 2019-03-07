@@ -35,19 +35,18 @@ def minimal_dashboard():
         "rows": [[{
             "data_name": "累计申请件数",
             "data_value": 12345,
-            'color': 'redbrown'
+            'color': 'redbrown',
+            "href": '/month_report#monthly_apply_bill'
         }, {
             "data_name": "累计放款金额(万)",
             "data_value": 1002333,
-            'color': 'blue'
-        }, {
-            "data_name": "目前在库金额(亿)",
-            "data_value": 801234,
-            'color': 'greensea'
+            'color': 'blue',
+            "href": '/month_report#monthly_loan_amount'
         }, {
             "data_name": "累计放款时收入(万)",
             "data_value": 23456,
-            'color': 'slategray'
+            'color': 'slategray',
+            "href": '/day_report#day_apply'
         }]]
     }, {
         "section_name":
@@ -86,36 +85,47 @@ def minimal_dashboard():
             "data_name": "当月申请件数",
             "data_value": 2333,
             'color': 'redbrown',
-            'href': '#bar_apply_month_bill'
+            'href': '/month_report#month_apply_bill'
         }, {
             "data_name": "当月放款金额(万)",
             "data_value": 2333,
             'color': 'blue',
-            'href': '#bar_loan_month_amount'
+            'href': '/month_report#month_loan_amount'
         }, {
             "data_name": "当月放款件均(万)",
             "data_value": 12.3,
             'color': 'greensea',
-            'href': '#bar_loan_month_amount_average'
+            'href': '/month_report#month_loan_average'
         }, {
             "data_name": "当月放款时收入(万)",
             "data_value": 2000,
             'color': 'slategray',
-            'href': '#bar_loan_month_income'
+            'href': '/month_report#month_loan_income'
         }, {
             "data_name": "当月审批通过率",
             "data_value": "80%",
             'color': 'redbrown',
-            'href': '#bar_review_month_pass_rate'
+            'href': '/month_report#month_review'
         }, {
             "data_name": "当月签约率",
             "data_value": "75%",
             'color': 'orange',
-            'href': '#bar_review_month_sign_rate'
+            'href': '/month_report#month_sign'
         }]]
     }]
 
-    dashboard_charts = []
+    dashboard_charts = [{
+        "name":
+        "总体情况",
+        "id":
+        'day_apply',
+        "charts": [{
+            "width": 12,
+            "offset": 0,
+            "content": dashboard_loan_amount().render_embed(),
+            "id": 'dashboard_loan_amount'
+        }]
+    }]
 
     return render_template(
         '/minimal/dashboard.html',
@@ -262,36 +272,108 @@ def minimal_month_report():
             "data_name": "当月申请件数",
             "data_value": 2333,
             'color': 'redbrown',
-            'href': '#bar_apply_month_bill'
+            'href': '#month_apply_bill'
         }, {
             "data_name": "当月放款金额(万)",
             "data_value": 2333,
             'color': 'blue',
-            'href': '#bar_loan_month_amount'
+            'href': '#month_loan_amount'
         }, {
             "data_name": "当月放款件均(万)",
             "data_value": 12.3,
             'color': 'greensea',
-            'href': '#bar_loan_month_amount_average'
+            'href': '#month_loan_average'
         }, {
             "data_name": "当月放款时收入(万)",
             "data_value": 2000,
             'color': 'slategray',
-            'href': '#bar_loan_month_income'
+            'href': '#month_loan_income'
         }, {
             "data_name": "当月审批通过率",
             "data_value": "80%",
             'color': 'redbrown',
-            'href': '#bar_review_month_pass_rate'
+            'href': '#month_review'
         }, {
             "data_name": "当月签约率",
             "data_value": "75%",
             'color': 'orange',
-            'href': '#bar_review_month_sign_rate'
+            'href': '#month_sign'
         }]]
     }]
 
-    month_charts = []
+    month_charts = [{
+        "name":
+        "本月数据",
+        "id":
+        'month',
+        "charts": [{
+            "width": 6,
+            "offset": 0,
+            "content": month_apply_bill().render_embed(),
+            "id": 'month_apply_bill'
+        },{
+            "width": 6,
+            "offset": 0,
+            "content": month_loan_amount().render_embed(),
+            "id": 'month_loan_amount'
+        },{
+            "width": 6,
+            "offset": 0,
+            "content": month_loan_average().render_embed(),
+            "id": 'month_loan_average'
+        },{
+            "width": 6,
+            "offset": 0,
+            "content": month_loan_income().render_embed(),
+            "id": 'month_loan_income'
+        },{
+            "width": 6,
+            "offset": 0,
+            "content": month_review().render_embed(),
+            "id": 'month_review'
+        },{
+            "width": 6,
+            "offset": 0,
+            "content": month_sign().render_embed(),
+            "id": 'month_sign'
+        }]
+    }, {
+        "name":
+        "每月数据",
+        "id":
+        'monthly',
+        "charts": [{
+            "width": 6,
+            "offset": 0,
+            "content": monthly_apply_bill().render_embed(),
+            "id": 'monthly_apply_bill'
+        },{
+            "width": 6,
+            "offset": 0,
+            "content": monthly_loan_amount().render_embed(),
+            "id": 'monthly_loan_amount'
+        },{
+            "width": 6,
+            "offset": 0,
+            "content": monthly_loan_average().render_embed(),
+            "id": 'monthly_loan_average'
+        },{
+            "width": 6,
+            "offset": 0,
+            "content": monthly_loan_income().render_embed(),
+            "id": 'monthly_loan_income'
+        },{
+            "width": 6,
+            "offset": 0,
+            "content": monthly_review().render_embed(),
+            "id": 'monthly_review'
+        },{
+            "width": 6,
+            "offset": 0,
+            "content": monthly_sign().render_embed(),
+            "id": 'monthly_sign'
+        }]
+    }]
 
     return render_template(
         '/minimal/report/day_report.html',

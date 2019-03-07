@@ -39,12 +39,14 @@
                 </div>
               </div>
             </div>
+            {% if 'href' in sub_collection_data%}
             <div class="back">
               <a href="{{sub_collection_data.href}}">
                 <i class="fa fa-bar-chart-o fa-4x"></i>
                 <span>查看详情</span>
               </a>
             </div>
+            {% endif %}
           </div>
         </div>
         {% endfor %}
