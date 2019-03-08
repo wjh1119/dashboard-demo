@@ -29,3 +29,7 @@ design
 # vc
 .vs
 .vscode
+
+# certs
+*.pem
+*.key
