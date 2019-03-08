@@ -15,7 +15,6 @@ from .charts import *
 PROJECT_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-
 @main.route('/home')
 def minimal_home():
 
@@ -25,8 +24,12 @@ def minimal_home():
 @login_required
 def minimal_root():
 
-    return redirect(
-        url_for('main.minimal_home'))
+    return redirect(url_for('main.minimal_home'))
+
+@main.route('/index')
+def minimal_index():
+
+    return redirect(url_for('main.minimal_home'))
 
 
 @main.route('/dashboard')
@@ -318,27 +321,27 @@ def minimal_month_report():
             "offset": 0,
             "content": month_apply_bill().render_embed(),
             "id": 'month_apply_bill'
-        },{
+        }, {
             "width": 6,
             "offset": 0,
             "content": month_loan_amount().render_embed(),
             "id": 'month_loan_amount'
-        },{
+        }, {
             "width": 6,
             "offset": 0,
             "content": month_loan_average().render_embed(),
             "id": 'month_loan_average'
-        },{
+        }, {
             "width": 6,
             "offset": 0,
             "content": month_loan_income().render_embed(),
             "id": 'month_loan_income'
-        },{
+        }, {
             "width": 6,
             "offset": 0,
             "content": month_review().render_embed(),
             "id": 'month_review'
-        },{
+        }, {
             "width": 6,
             "offset": 0,
             "content": month_sign().render_embed(),
@@ -354,27 +357,27 @@ def minimal_month_report():
             "offset": 0,
             "content": monthly_apply_bill().render_embed(),
             "id": 'monthly_apply_bill'
-        },{
+        }, {
             "width": 6,
             "offset": 0,
             "content": monthly_loan_amount().render_embed(),
             "id": 'monthly_loan_amount'
-        },{
+        }, {
             "width": 6,
             "offset": 0,
             "content": monthly_loan_average().render_embed(),
             "id": 'monthly_loan_average'
-        },{
+        }, {
             "width": 6,
             "offset": 0,
             "content": monthly_loan_income().render_embed(),
             "id": 'monthly_loan_income'
-        },{
+        }, {
             "width": 6,
             "offset": 0,
             "content": monthly_review().render_embed(),
             "id": 'monthly_review'
-        },{
+        }, {
             "width": 6,
             "offset": 0,
             "content": monthly_sign().render_embed(),
