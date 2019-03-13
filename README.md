@@ -34,15 +34,15 @@ Create an demo of a data presentation system for the product department, from wh
 
 ## 3. Visual charts'  <a name="charts"></a>  
 - The web app shows visualizations about some key indicators.
-> ![Image text](https://github.com/wjh2016/dashboard-demo/tree/master/readme-img/example1.png)
-> ![Image text](https://github.com/wjh2016/dashboard-demo/tree/master/readme-img/example2.png)
+> ![example1](https://raw.githubusercontent.com/wjh2016/dashboard-demo/master/readme-img/example1.png)
+> ![example2](https://raw.githubusercontent.com/wjh2016/dashboard-demo/master/readme-img/example2.png)
 
 ## 4. how to view the web app?
 There are two ways to view the web app:
 1. You can click on the [link](http://47.106.213.128:8000)
 2. Run the following command in the app's directory to run the web app.  
 >     `set FLASK_APP=flasky.py
-      set FLASK_CONFIG=production
-      flask run --host=0.0.0.0 --port=3001`
+>      set FLASK_CONFIG=production
+>      flask run --host=0.0.0.0 --port=3001`
 Then go to http://0.0.0.0:3001/
 
