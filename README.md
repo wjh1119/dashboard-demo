@@ -32,14 +32,14 @@
 
 Create an demo of a data presentation system for the product department, from which you can see some visual charts for each key link..
 
-## 3. Visual charts'  <a name="charts"></a>  
+## 3. Visual charts  <a name="charts"></a>  
 - The web app shows visualizations about some key indicators.
 > ![example1](https://raw.githubusercontent.com/wjh2016/dashboard-demo/master/readme-img/example1.png)
 > ![example2](https://raw.githubusercontent.com/wjh2016/dashboard-demo/master/readme-img/example2.png)
 
-## 4. how to view the web app?
+## 4. how to view the web app? <a name="web"></a>
 There are two ways to view the web app:
-1. You can click on the [link](http://47.106.213.128:8000)
+1. You can click on this [dashboard-demo](http://47.106.213.128:8000/home)
 2. Run the following command in the app's directory to run the web app.  
 >     `set FLASK_APP=flasky.py
 >      set FLASK_CONFIG=production
