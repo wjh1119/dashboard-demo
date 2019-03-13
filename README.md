@@ -39,7 +39,7 @@ Create an demo of a data presentation system for the product department, from wh
 
 ## 4. how to view the web app? <a name="web"></a>
 There are two ways to view the web app:
-1. You can click on this [dashboard-demo](http://47.106.213.128:8000/home)
+1. You can click on this link[dashboard-demo](http://47.106.213.128:8000/home)
 2. Run the following command in the app's directory to run the web app.  
 >     `set FLASK_APP=flasky.py
 >      set FLASK_CONFIG=production
